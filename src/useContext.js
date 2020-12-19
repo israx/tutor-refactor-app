@@ -85,7 +85,7 @@ function ContextProvider(props) {
     console.log("working");
     e.preventDefault();
     axios
-      .post("http://localhost:5000/tutor/add", tutor)
+      .post("https://tutor-app-version1.herokuapp.com/tutor/add", tutor)
       .then((result) => {
         console.log(result);
       })
@@ -95,12 +95,12 @@ function ContextProvider(props) {
   useEffect(() => {
     //Retriving languages and subjects
     axios
-      .get("http://localhost:5000/subject")
+      .get("https://tutor-app-version1.herokuapp.com/subject")
       .then((result) => setSubjects((prev) => [...result.data]))
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:5000/language")
+      .get("https://tutor-app-version1.herokuapp.com/language")
       .then((result) => setLanguages((prev) => [...result.data]))
       .catch((err) => console.log(err));
   }, []);

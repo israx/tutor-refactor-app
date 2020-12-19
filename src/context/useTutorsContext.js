@@ -8,7 +8,7 @@ function ContextProviderTutors(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tutor/")
+      .get("https://tutor-app-version1.herokuapp.com/tutor/")
       .then((result) => setTutorsList([...result.data]))
       .catch((err) => console.log(err));
   }, []);

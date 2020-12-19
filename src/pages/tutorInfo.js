@@ -60,7 +60,7 @@ export default function TutorInfo() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/tutor/${id}`)
+      .get(`https://tutor-app-version1.herokuapp.com/tutor/${id}`)
       .then((result) => setSingleTutor({ ...result.data }))
       .catch((err) => console.log(err));
   }, []);
