@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Nav from "./components/Nav";
+import Tutors from "./pages/tutors";
+import TutorsApply from "./pages/tutorsApply";
+// import StudentApply from "./pages/students";
+import TutorsFind from "./pages/tutorsFind";
+import { ProviderTutors } from "./context/useTutorsContext";
+import GlobalStyles from "./styles/GlobalStyles";
+import Typography from "./styles/Typography";
+import TutorInfo from "./pages/tutorInfo";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProviderTutors>
+      <GlobalStyles />
+      <Typography />
+      <div className="App" style={{ paddingTop: "4rem" }}>
+        <Nav />
+        <Switch>
+          <Route exact path="/tutor">
+            <Tutors />
+          </Route>
+          <Route path="/tutor/add">
+            <TutorsApply />
+          </Route>
+          <Route path="/tutor/find">
+            <TutorsFind />
+          </Route>
+          <Route path="/tutor/:id">
+            <TutorInfo />
+          </Route>
+          {/* <Route path="/student/add">
+            <StudentApply />
+          </Route> */}
+        </Switch>
+      </div>
+    </ProviderTutors>
   );
 }
 
