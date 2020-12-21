@@ -1,8 +1,12 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { context } from "../useContext";
+import { contextTutorsList } from "../context/useTutorsContext";
 import styled from "styled-components";
 import { Multiselect } from "multiselect-react-dropdown";
 import Email from "react-email-autocomplete";
+import axios from "axios";
+
 const FormContainer = styled.div`
   padding: 2rem;
 `;
@@ -35,20 +39,34 @@ const FormStyled = styled.form`
 `;
 
 export default function TutorsApply() {
+  const history = useHistory();
   const {
     tutor,
     days,
     subjects,
     languages,
-    handleSubmit,
     handleChange,
     onRemove,
     onSelect,
   } = useContext(context);
+  const { setUpdateTutors } = useContext(contextTutorsList);
 
   const { name, description, email } = tutor;
   console.log(tutor);
 
+  function handleSubmit(e) {
+    console.log("working");
+    e.preventDefault();
+    axios
+      .post("https://tutor-app-version1.herokuapp.com/tutor/add", tutor)
+      .then((result) => {
+        console.log(result);
+        history.push("/tutor");
+        //Updating context so useEffect can rerender again and update the list of tutors
+        setUpdateTutors((prev) => !prev);
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <FormContainer>
       <h1>Work with Us</h1>

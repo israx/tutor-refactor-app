@@ -81,17 +81,6 @@ function ContextProvider(props) {
     }));
   }
 
-  function handleSubmit(e) {
-    console.log("working");
-    e.preventDefault();
-    axios
-      .post("https://tutor-app-version1.herokuapp.com/tutor/add", tutor)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
-  }
-
   useEffect(() => {
     //Retriving languages and subjects
     axios
@@ -112,7 +101,6 @@ function ContextProvider(props) {
         days,
         subjects,
         languages,
-        handleSubmit,
         handleChange,
         onRemove,
         onSelect,
